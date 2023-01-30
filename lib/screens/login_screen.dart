@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:seneca_social/services/auth_methods.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
+import 'package:seneca_social/utils/utils.dart';
+import 'package:seneca_social/widgets/progress_circle.dart';
 import 'package:seneca_social/widgets/text_field_input.dart';
 import 'package:seneca_social/styles/button_styles.dart';
 
@@ -15,11 +18,31 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isLoading = false;
+
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void logIn() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String response = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    setState(() {
+      _isLoading = false;
+    });
+    if (response != 'success') {
+      showSnackBar(response, context);
+    } else {
+      //successful login
+      //print("DEBUG: Login Successful");
+
+    }
   }
 
   @override
@@ -61,8 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: primaryButtonStyle,
-                    onPressed: (() {}),
-                    child: const Text("Sign In"),
+                    onPressed: (logIn),
+                    child: _isLoading
+                        ? const ProgressCircle()
+                        : const Text("Sign In"),
                   ),
                 ),
                 const SizedBox(
@@ -73,7 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("New here? ", style: TextStyle(color: Colors.black54),),
+                    const Text(
+                      "New here? ",
+                      style: TextStyle(color: Colors.black54),
+                    ),
                     TextButton(
                       style:
                           TextButton.styleFrom(foregroundColor: Colors.black),

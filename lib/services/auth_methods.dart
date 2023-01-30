@@ -37,6 +37,8 @@ class AuthMethods {
           'peers': [],
         });
         res = "success";
+      } else {
+        res = "Some Information Is Missing";
       }
     } on FirebaseAuthException catch (err) {
       switch (err.code) {
@@ -56,8 +58,39 @@ class AuthMethods {
     return res;
   }
 
-
   //login the user
-  // Future<String> loginUser({}) async{}
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String res = "Error Has Occured!";
 
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        //login the user
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = "success";
+      } else {
+        res = "Missing Information";
+      }
+    } on FirebaseAuthException catch (err) {
+      switch (err.code) {
+        case 'invalid-email':
+          res = "Invalid Email Format";
+          break;
+        case 'user-disabled':
+          res = "This Account Is Disabled";
+          break;
+        case 'user-not-found':
+          res = "Incorrect Credentials";
+          break;
+        case 'wrong-password':
+          res = "Incorrect Credentials";
+          break;
+      }
+    } catch (err) {
+      res = err.toString();
+    }
+
+    return res;
+  }
 }

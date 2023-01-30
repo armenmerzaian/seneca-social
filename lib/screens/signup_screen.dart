@@ -4,6 +4,7 @@ import 'package:seneca_social/services/auth_methods.dart';
 import 'package:seneca_social/styles/button_styles.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
 import 'package:seneca_social/utils/utils.dart';
+import 'package:seneca_social/widgets/progress_circle.dart';
 import 'package:seneca_social/widgets/text_field_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -46,14 +47,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showSnackBar(response, context);
     }
   }
-
-  Widget progressIndicator = const SizedBox(
-      height: 16,
-      width: 16,
-      child: CircularProgressIndicator.adaptive(
-        backgroundColor: Colors.white,
-        strokeWidth: 2.0,
-      ));
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     style: primaryButtonStyle,
                     onPressed: (signUp),
                     child: _isLoading
-                        ? progressIndicator
+                        ? const ProgressCircle()
                         : const Text("Sign Up"),
                   ),
                 ),

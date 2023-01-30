@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Seneca Social',
       theme: ThemeData.light(),
-      home: SignUpScreen(),
+      home: LoginScreen(),
       /* home: const ResponsiveLayout(
         mobileScreenLayout: MobileScreenLayout(),
         webScreenLayout: WebScreenLayout(),
