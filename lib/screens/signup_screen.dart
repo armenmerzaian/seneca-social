@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:seneca_social/services/auth_methods.dart';
 import 'package:seneca_social/styles/button_styles.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
+import 'package:seneca_social/utils/utils.dart';
 import 'package:seneca_social/widgets/text_field_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -18,6 +19,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isLoading = false;
+
   @override
   void dispose() {
     super.dispose();
@@ -26,6 +29,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _usernameController.dispose();
     _fullnameController.dispose();
   }
+
+  void signUp() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String response = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        fullname: _fullnameController.text,
+        username: _usernameController.text,
+        password: _passwordController.text);
+    setState(() {
+      _isLoading = false;
+    });
+    if (response != 'success') {
+      showSnackBar(response, context);
+    }
+  }
+
+  Widget progressIndicator = const SizedBox(
+      height: 16,
+      width: 16,
+      child: CircularProgressIndicator.adaptive(
+        backgroundColor: Colors.white,
+        strokeWidth: 2.0,
+      ));
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +104,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: primaryButtonStyle,
-                    onPressed: (() async {
-                      await AuthMethods().signUpUser(
-                          email: _emailController.text,
-                          fullname: _fullnameController.text,
-                          username: _usernameController.text,
-                          password: _passwordController.text);
-                    }),
-                    child: const Text("Sign Up"),
+                    onPressed: (signUp),
+                    child: _isLoading
+                        ? progressIndicator
+                        : const Text("Sign Up"),
                   ),
                 ),
                 const SizedBox(
