@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:seneca_social/styles/button_styles.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
 import 'package:seneca_social/widgets/text_field_input.dart';
-import 'package:seneca_social/styles/button_styles.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -73,7 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("New here? ", style: TextStyle(color: Colors.black54),),
+                    const Text(
+                      "New here? ",
+                      style: TextStyle(color: Colors.black54),
+                    ),
                     TextButton(
                       style:
                           TextButton.styleFrom(foregroundColor: Colors.black),

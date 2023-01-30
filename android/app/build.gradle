@@ -78,4 +78,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
 }
