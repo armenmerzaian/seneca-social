@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:seneca_social/services/auth_methods.dart';
 import 'package:seneca_social/styles/button_styles.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
 import 'package:seneca_social/widgets/text_field_input.dart';
@@ -75,7 +76,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: primaryButtonStyle,
-                    onPressed: (() {}),
+                    onPressed: (() async {
+                      await AuthMethods().signUpUser(
+                          email: _emailController.text,
+                          fullname: _fullnameController.text,
+                          username: _usernameController.text,
+                          password: _passwordController.text);
+                    }),
                     child: const Text("Sign Up"),
                   ),
                 ),
