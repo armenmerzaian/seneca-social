@@ -6,6 +6,7 @@ import 'package:seneca_social/responsive/mobile_screen_layout.dart';
 import 'package:seneca_social/responsive/responsive_layout_screen.dart';
 import 'package:seneca_social/responsive/web_screen_layout.dart';
 import 'package:seneca_social/screens/login_screen.dart';
+import 'package:seneca_social/screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Seneca Social',
       theme: ThemeData.light(),
-      home: LoginScreen(),
+      home: SignUpScreen(),
       /* home: const ResponsiveLayout(
         mobileScreenLayout: MobileScreenLayout(),
         webScreenLayout: WebScreenLayout(),

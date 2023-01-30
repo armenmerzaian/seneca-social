@@ -12,6 +12,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _fullnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -20,6 +22,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
+    _fullnameController.dispose();
   }
 
   @override
@@ -42,15 +46,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //text field input email
                 TextFieldInput(
                     textEditingController: _emailController,
-                    hintText: 'Enter your email',
+                    hintText: 'Email',
                     textInputType: TextInputType.emailAddress),
                 const SizedBox(
                   height: 24,
                 ),
+                TextFieldInput(
+                    textEditingController: _fullnameController,
+                    hintText: 'Full Name',
+                    textInputType: TextInputType.name),
+                const SizedBox(height: 24),
+                TextFieldInput(
+                    textEditingController: _usernameController,
+                    hintText: 'Username',
+                    textInputType: TextInputType.text),
+                const SizedBox(height: 24),
                 //text field for password
                 TextFieldInput(
                     textEditingController: _passwordController,
-                    hintText: 'Enter your Password',
+                    hintText: 'Password',
                     textInputType: TextInputType.text,
                     isPassword: true),
                 const SizedBox(
@@ -62,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: ElevatedButton(
                     style: primaryButtonStyle,
                     onPressed: (() {}),
-                    child: const Text("Sign In"),
+                    child: const Text("Sign Up"),
                   ),
                 ),
                 const SizedBox(
@@ -74,14 +88,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "New here? ",
+                      "Coming Back? ",
                       style: TextStyle(color: Colors.black54),
                     ),
                     TextButton(
                       style:
                           TextButton.styleFrom(foregroundColor: Colors.black),
                       onPressed: (() {}),
-                      child: const Text("Sign Up"),
+                      child: const Text("Sign In"),
                     ),
                   ],
                 ),
