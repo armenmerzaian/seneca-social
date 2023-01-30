@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:seneca_social/responsive/mobile_screen_layout.dart';
+import 'package:seneca_social/responsive/responsive_layout_screen.dart';
+import 'package:seneca_social/responsive/web_screen_layout.dart';
+import 'package:seneca_social/screens/login_screen.dart';
 import 'package:seneca_social/services/auth_methods.dart';
 import 'package:seneca_social/styles/button_styles.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
@@ -44,8 +48,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _isLoading = false;
     });
     if (response != 'success') {
-      showSnackBar(response, context);
+      if (mounted) {
+        showSnackBar(response, context);
+      }
+    } else {
+      //login success
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const ResponsiveLayout(
+                mobileScreenLayout: MobileScreenLayout(),
+                webScreenLayout: WebScreenLayout(),
+              );
+            },
+          ),
+        );
+      }
     }
+  }
+
+  void navigateLogin() async {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ));
   }
 
   @override
@@ -97,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: primaryButtonStyle,
-                    onPressed: (signUp),
+                    onPressed: signUp,
                     child: _isLoading
                         ? const ProgressCircle()
                         : const Text("Sign Up"),
@@ -118,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextButton(
                       style:
                           TextButton.styleFrom(foregroundColor: Colors.black),
-                      onPressed: (() {}),
+                      onPressed: (navigateLogin),
                       child: const Text("Sign In"),
                     ),
                   ],

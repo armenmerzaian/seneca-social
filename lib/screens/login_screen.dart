@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:seneca_social/screens/signup_screen.dart';
 import 'package:seneca_social/services/auth_methods.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
 import 'package:seneca_social/utils/utils.dart';
@@ -37,12 +38,21 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = false;
     });
     if (response != 'success') {
-      showSnackBar(response, context);
+      if(mounted){
+        showSnackBar(response, context);
+      }
     } else {
-      //successful login
-      //print("DEBUG: Login Successful");
-
+      // login success
+      //do nothing, streambuilder on main component will rerender
     }
+  }
+
+  void navigateSignUp() async {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const SignUpScreen(),
+        ));
   }
 
   @override
@@ -105,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextButton(
                       style:
                           TextButton.styleFrom(foregroundColor: Colors.black),
-                      onPressed: (() {}),
+                      onPressed: (navigateSignUp),
                       child: const Text("Sign Up"),
                     ),
                   ],

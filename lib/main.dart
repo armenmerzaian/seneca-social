@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:seneca_social/responsive/mobile_screen_layout.dart';
 import 'package:seneca_social/responsive/responsive_layout_screen.dart';
 import 'package:seneca_social/responsive/web_screen_layout.dart';
 import 'package:seneca_social/screens/login_screen.dart';
-import 'package:seneca_social/screens/signup_screen.dart';
+import 'package:seneca_social/widgets/progress_circle.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,10 +34,25 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Seneca Social',
       theme: ThemeData.light(),
-      home: LoginScreen(),
-      /* home: const ResponsiveLayout(
-        mobileScreenLayout: MobileScreenLayout(),
-        webScreenLayout: WebScreenLayout(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return const ResponsiveLayout(
+                mobileScreenLayout: MobileScreenLayout(),
+                webScreenLayout: WebScreenLayout(),
+              );
+            } else if (snapshot.hasError) {
+              Text("Some Error: ${snapshot.error}");
+            }
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const ProgressCircle(color: Colors.red);
+          }
+          return const LoginScreen();
+        }),
+      ),
+      /* home: ,
       ), */
     );
   }

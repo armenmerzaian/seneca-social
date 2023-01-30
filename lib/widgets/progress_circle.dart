@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ProgressCircle extends StatelessWidget {
-  const ProgressCircle({super.key});
+  final Color color;
+  const ProgressCircle({this.color = Colors.white, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
         height: 16,
         width: 16,
         child: CircularProgressIndicator.adaptive(
-          backgroundColor: Colors.white,
+          backgroundColor: color,
           strokeWidth: 2.0,
         ));
   }
