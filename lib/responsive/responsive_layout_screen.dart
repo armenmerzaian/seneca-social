@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_social/providers/user_provider.dart';
-import 'package:seneca_social/utils/dimensions.dart';
+import 'package:seneca_social/utils/global_variables.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   final Widget webScreenLayout;
