@@ -27,6 +27,7 @@ class AuthMethods {
         //add user to database
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'uid': userCredential.user!.uid,
+          'profileImgUrl': "",
           'email': email,
           'fullname': fullname,
           'username': username,

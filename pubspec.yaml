@@ -45,6 +45,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.1.6
+  image_picker: ^0.8.6+1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -63,7 +64,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/seneca-logo.svg
-  
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
@@ -74,24 +75,23 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: Mulish
-     fonts:
-       - asset: assets/fonts/Mulish-Black.ttf
-       - asset: assets/fonts/Mulish-BlackItalic.ttf
-       - asset: assets/fonts/Mulish-Bold.ttf
-       - asset: assets/fonts/Mulish-BoldItalic.ttf
-       - asset: assets/fonts/Mulish-ExtraBold.ttf
-       - asset: assets/fonts/Mulish-ExtraBoldItalic.ttf
-       - asset: assets/fonts/Mulish-ExtraLight.ttf
-       - asset: assets/fonts/Mulish-ExtraLightItalic.ttf
-       - asset: assets/fonts/Mulish-Italic.ttf
-       - asset: assets/fonts/Mulish-Light.ttf
-       - asset: assets/fonts/Mulish-LightItalic.ttf
-       - asset: assets/fonts/Mulish-Medium.ttf
-       - asset: assets/fonts/Mulish-MediumItalic.ttf
-       - asset: assets/fonts/Mulish-Regular.ttf
-       - asset: assets/fonts/Mulish-SemiBold.ttf
-       - asset: assets/fonts/Mulish-SemiBoldItalic.ttf
-  
+    - family: Mulish
+      fonts:
+        - asset: assets/fonts/Mulish-Black.ttf
+        - asset: assets/fonts/Mulish-BlackItalic.ttf
+        - asset: assets/fonts/Mulish-Bold.ttf
+        - asset: assets/fonts/Mulish-BoldItalic.ttf
+        - asset: assets/fonts/Mulish-ExtraBold.ttf
+        - asset: assets/fonts/Mulish-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Mulish-ExtraLight.ttf
+        - asset: assets/fonts/Mulish-ExtraLightItalic.ttf
+        - asset: assets/fonts/Mulish-Italic.ttf
+        - asset: assets/fonts/Mulish-Light.ttf
+        - asset: assets/fonts/Mulish-LightItalic.ttf
+        - asset: assets/fonts/Mulish-Medium.ttf
+        - asset: assets/fonts/Mulish-MediumItalic.ttf
+        - asset: assets/fonts/Mulish-Regular.ttf
+        - asset: assets/fonts/Mulish-SemiBold.ttf
+        - asset: assets/fonts/Mulish-SemiBoldItalic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

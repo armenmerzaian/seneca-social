@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(child: Container(), flex: 2),
+                Flexible(flex: 2, child: Container()),
                 //svg image
                 SvgPicture.asset(
                   senecaLogo,
@@ -89,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 24,
                 ),
-                Flexible(child: Container(), flex: 2),
+                Flexible(flex: 2, child: Container()),
                 //sign up button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
