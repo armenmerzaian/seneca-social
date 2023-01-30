@@ -12,10 +12,10 @@ import 'package:seneca_social/models/user.dart' as model;
 import 'package:seneca_social/widgets/like_animation.dart';
 
 class PostCard extends StatefulWidget {
-  final snap;
+  final documentSnapshot;
   const PostCard({
     Key? key,
-    required this.snap,
+    required this.documentSnapshot,
   }) : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class _PostCardState extends State<PostCard> {
     try {
       QuerySnapshot snap = await FirebaseFirestore.instance
           .collection('posts')
-          .doc(widget.snap['postId'])
+          .doc(widget.documentSnapshot['postId'])
           .collection('comments')
           .get();
       commentLen = snap.docs.length;
@@ -89,7 +89,7 @@ class _PostCardState extends State<PostCard> {
                 CircleAvatar(
                   radius: 16,
                   backgroundImage: NetworkImage(
-                    widget.snap['profImage'].toString(),
+                    widget.documentSnapshot['profImage'].toString(),
                   ),
                 ),
                 Expanded(
@@ -102,7 +102,7 @@ class _PostCardState extends State<PostCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.snap['username'].toString(),
+                          widget.documentSnapshot['username'].toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -111,7 +111,7 @@ class _PostCardState extends State<PostCard> {
                     ),
                   ),
                 ),
-                widget.snap['uid'].toString() == user.uid
+                widget.documentSnapshot['uid'].toString() == user.uid
                     ? IconButton(
                         onPressed: () {
                           showDialog(
@@ -137,7 +137,8 @@ class _PostCardState extends State<PostCard> {
                                               ),
                                               onTap: () {
                                                 deletePost(
-                                                  widget.snap['postId']
+                                                  widget.documentSnapshot[
+                                                          'postId']
                                                       .toString(),
                                                 );
                                                 // remove the dialog box
@@ -159,9 +160,9 @@ class _PostCardState extends State<PostCard> {
           GestureDetector(
             onDoubleTap: () {
               FireStoreMethods().likePost(
-                widget.snap['postId'].toString(),
+                widget.documentSnapshot['postId'].toString(),
                 user.uid,
-                widget.snap['likes'],
+                widget.documentSnapshot['likes'],
               );
               setState(() {
                 isLikeAnimating = true;
@@ -174,7 +175,7 @@ class _PostCardState extends State<PostCard> {
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: double.infinity,
                   child: Image.network(
-                    widget.snap['postUrl'].toString(),
+                    widget.documentSnapshot['postUrl'].toString(),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -205,10 +206,11 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: <Widget>[
               LikeAnimation(
-                isAnimating: widget.snap['likes'].contains(user.uid),
+                isAnimating:
+                    widget.documentSnapshot['likes'].contains(user.uid),
                 smallLike: true,
                 child: IconButton(
-                  icon: widget.snap['likes'].contains(user.uid)
+                  icon: widget.documentSnapshot['likes'].contains(user.uid)
                       ? const Icon(
                           Icons.favorite,
                           color: Colors.red,
@@ -217,9 +219,9 @@ class _PostCardState extends State<PostCard> {
                           Icons.favorite_border,
                         ),
                   onPressed: () => FireStoreMethods().likePost(
-                    widget.snap['postId'].toString(),
+                    widget.documentSnapshot['postId'].toString(),
                     user.uid,
-                    widget.snap['likes'],
+                    widget.documentSnapshot['likes'],
                   ),
                 ),
               ),
@@ -230,7 +232,7 @@ class _PostCardState extends State<PostCard> {
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => CommentsScreen(
-                      postId: widget.snap['postId'].toString(),
+                      postId: widget.documentSnapshot['postId'].toString(),
                     ),
                   ),
                 ),
@@ -261,7 +263,7 @@ class _PostCardState extends State<PostCard> {
                         .subtitle2!
                         .copyWith(fontWeight: FontWeight.w800),
                     child: Text(
-                      '${widget.snap['likes'].length} likes',
+                      '${widget.documentSnapshot['likes'].length} likes',
                       style: Theme.of(context).textTheme.bodyText2,
                     )),
                 Container(
@@ -274,13 +276,13 @@ class _PostCardState extends State<PostCard> {
                       style: const TextStyle(color: primaryColor),
                       children: [
                         TextSpan(
-                          text: widget.snap['username'].toString(),
+                          text: widget.documentSnapshot['username'].toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         TextSpan(
-                          text: ' ${widget.snap['description']}',
+                          text: ' ${widget.documentSnapshot['description']}',
                         ),
                       ],
                     ),
@@ -300,7 +302,7 @@ class _PostCardState extends State<PostCard> {
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CommentsScreen(
-                        postId: widget.snap['postId'].toString(),
+                        postId: widget.documentSnapshot['postId'].toString(),
                       ),
                     ),
                   ),
@@ -308,8 +310,8 @@ class _PostCardState extends State<PostCard> {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Text(
-                    DateFormat.yMMMd()
-                        .format(widget.snap['datePublished'].toDate()),
+                    DateFormat.yMMMd().format(
+                        widget.documentSnapshot['datePublished'].toDate()),
                     style: const TextStyle(
                       color: secondaryColor,
                     ),

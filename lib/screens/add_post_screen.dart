@@ -18,7 +18,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
-
   _selectImage(BuildContext parentContext) async {
     return showDialog(
       context: parentContext,

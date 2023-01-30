@@ -19,8 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor:
-          width > webScreenSize ? Colors.grey : Colors.white,
+      backgroundColor: width > webScreenSize ? Colors.grey : Colors.white,
       appBar: width > webScreenSize
           ? null
           : AppBar(
@@ -58,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 vertical: width > webScreenSize ? 15 : 0,
               ),
               child: PostCard(
-                snap: snapshot.data!.docs[index].data(),
+                documentSnapshot: snapshot.data!.docs[index].data(),
               ),
             ),
           );

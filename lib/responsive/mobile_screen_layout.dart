@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_social/providers/user_provider.dart';
 import 'package:seneca_social/models/user.dart' as model;
+import 'package:seneca_social/utils/colors.dart';
 import 'package:seneca_social/utils/global_variables.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -51,7 +52,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       ),
       bottomNavigationBar: CupertinoTabBar(
         height: 70,
-        backgroundColor: Colors.red,
+        backgroundColor: primaryColor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
