@@ -1,9 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:seneca_social/models/user.dart' as model;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<model.User> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+    DocumentSnapshot documentSnapshot =
+        await _firestore.collection('users').doc(currentUser.uid).get();
+    return model.User.fromDocumentSnap(documentSnapshot);
+  }
 
   //sign up the user
   Future<String> signUpUser({
@@ -23,18 +31,21 @@ class AuthMethods {
         UserCredential userCredential = await _auth
             .createUserWithEmailAndPassword(email: email, password: password);
 
+        model.User user = model.User(
+            uid: userCredential.user!.uid,
+            profileImgUrl: "",
+            email: email,
+            fullname: fullname,
+            username: username,
+            biography: "",
+            followers: [],
+            following: [],
+            peers: []);
         //add user to database
-        await _firestore.collection('users').doc(userCredential.user!.uid).set({
-          'uid': userCredential.user!.uid,
-          'profileImgUrl': "",
-          'email': email,
-          'fullname': fullname,
-          'username': username,
-          'biography': "",
-          'followers': [],
-          'following': [],
-          'peers': [],
-        });
+        await _firestore
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set(user.toJSON());
         res = "success";
       } else {
         res = "Some Information Is Missing";

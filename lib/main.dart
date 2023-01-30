@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seneca_social/providers/user_provider.dart';
 import 'package:seneca_social/responsive/mobile_screen_layout.dart';
 import 'package:seneca_social/responsive/responsive_layout_screen.dart';
 import 'package:seneca_social/responsive/web_screen_layout.dart';
@@ -30,30 +32,35 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Seneca Social',
-      theme: ThemeData.light(),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: ((context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            if (snapshot.hasData) {
-              return const ResponsiveLayout(
-                mobileScreenLayout: MobileScreenLayout(),
-                webScreenLayout: WebScreenLayout(),
-              );
-            } else if (snapshot.hasError) {
-              Text("Some Error: ${snapshot.error}");
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) {
+          return UserProvider();
+        })
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Seneca Social',
+        theme: ThemeData.light(),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: ((context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.hasData) {
+                return const ResponsiveLayout(
+                  mobileScreenLayout: MobileScreenLayout(),
+                  webScreenLayout: WebScreenLayout(),
+                );
+              } else if (snapshot.hasError) {
+                Text("Some Error: ${snapshot.error}");
+              }
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const ProgressCircle(color: Colors.red);
             }
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const ProgressCircle(color: Colors.red);
-          }
-          return const LoginScreen();
-        }),
+            return const LoginScreen();
+          }),
+        ),
       ),
-      /* home: ,
-      ), */
     );
   }
 }
