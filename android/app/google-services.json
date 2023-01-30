@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "787418988209",
+    "project_id": "seneca-social-4d7b0",
+    "storage_bucket": "seneca-social-4d7b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787418988209:android:0f4d4057fad38132076c90",
+        "android_client_info": {
+          "package_name": "com.example.seneca_social"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787418988209-tjucnl1ni6jvduvlafp7a9bpghvu18cu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJu1nQXm1pq0L5RgcXuNkm6a8nJJ2j5Ac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787418988209-tjucnl1ni6jvduvlafp7a9bpghvu18cu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787418988209-m6b4a9q9lf9k73djvlmb5an1i85irrvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.senecaSocial"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
