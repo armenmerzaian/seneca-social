@@ -122,6 +122,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 Icons.upload,
               ),
               onPressed: () => _selectImage(context),
+              iconSize: 200.0,
+              color: Colors.green,
             ),
           )
         : Scaffold(
@@ -173,7 +175,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       child: TextField(
                         controller: _descriptionController,
                         decoration: const InputDecoration(
-                            hintText: "Write a caption...",
+                            hintText: "Enter a description...",
                             border: InputBorder.none),
                         maxLines: 8,
                       ),

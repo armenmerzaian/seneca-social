@@ -52,7 +52,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: mobileBackgroundColor,
+        backgroundColor: Colors.red,
         title: const Text(
           'Comments',
         ),
@@ -94,13 +94,15 @@ class _CommentsScreenState extends State<CommentsScreen> {
                 radius: 18,
               ),
               Expanded(
-                child: Padding(
+                child: Container(
                   padding: const EdgeInsets.only(left: 16, right: 8),
                   child: TextField(
                     controller: commentEditingController,
                     decoration: InputDecoration(
-                      hintText: 'Comment as ${user.username}',
+                      hintText: 'Comment ${user.username}',
                       border: InputBorder.none,
+                      filled: true,
+                      fillColor: Colors.grey,
                     ),
                   ),
                 ),

@@ -31,9 +31,13 @@ class CommentCard extends StatelessWidget {
                             text: snap.data()['name'],
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: Colors.black
                             )),
                         TextSpan(
                           text: ' ${snap.data()['text']}',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                          ),
                         ),
                       ],
                     ),
