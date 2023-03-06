@@ -33,3 +33,8 @@
 
 ### Implementation (7/10)
 - See open issues #15 and #19
+
+## Sprint 3
+
+### Documentation
+- Items not added to the Project board nor descriptions provided. -3
