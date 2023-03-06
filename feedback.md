@@ -19,3 +19,17 @@
 
 ### Documentation (10/10)
 - Use more descriptive PRs in the future!
+
+
+# BTS630
+
+## Sprint 2
+
+### Documentation (5/6)
+- After fixing issues, make sure to created properly documented PRs.
+
+### Performance
+- Arman and Shrey missed Sprint Review. 
+
+### Implementation (7/10)
+- See open issues #15 and #19
