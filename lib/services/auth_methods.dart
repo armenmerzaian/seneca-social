@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:seneca_social/models/user.dart' as model;
+import 'package:seneca_social/services/storage_methods.dart';
 import 'package:seneca_social/utils/svg_strings.dart';
+
+import 'firestore_methods.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,6 +16,26 @@ class AuthMethods {
     DocumentSnapshot documentSnapshot =
         await _firestore.collection('users').doc(currentUser.uid).get();
     return model.User.fromDocumentSnap(documentSnapshot);
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      // Get the currently authenticated user
+      User? user = FirebaseAuth.instance.currentUser;
+
+      print(user);
+      // Delete the user's data from Firestore
+      await FireStoreMethods().deleteUser(user?.uid);
+
+      // Delete the user's data from Firebase Authentication
+      await user?.delete();
+
+      // Sign out the user
+      await FirebaseAuth.instance.signOut();
+    } catch (error) {
+      // Handle any errors that occur
+      print("Error deleting account: $error");
+    }
   }
 
   //sign up the user

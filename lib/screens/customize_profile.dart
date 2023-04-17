@@ -114,15 +114,17 @@ class _CustomizeProfileState extends State<CustomizeProfile> {
 
     return _file == null
         ? Center(
-            child: IconButton(
-              icon: const Icon(
-                Icons.upload,
-              ),
-              onPressed: () => _selectImage(context),
-              iconSize: 200.0,
-              color: Colors.green,
-            ),
-          )
+  child: Material(
+    child: IconButton(
+      icon: const Icon(
+        Icons.upload,
+      ),
+      onPressed: () => _selectImage(context),
+      iconSize: 200.0,
+      color: Colors.green,
+    ),
+  ),
+)
         : Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.red,

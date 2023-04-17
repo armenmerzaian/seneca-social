@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:seneca_social/models/user.dart';
 import 'package:seneca_social/providers/user_provider.dart';
 import 'package:seneca_social/screens/customize_profile.dart';
+import 'package:seneca_social/services/auth_methods.dart';
 
 import 'package:seneca_social/services/firestore_methods.dart';
 import 'package:seneca_social/utils/colors.dart';
@@ -12,6 +13,8 @@ import 'package:seneca_social/widgets/comment_card.dart';
 import 'package:seneca_social/services/storage_methods.dart';
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+
+import 'login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -71,6 +74,44 @@ class ProfileScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const CustomizeProfile()));
+              },
+            ),
+          ),
+          Container(
+            child: ElevatedButton(
+              child: Text(
+                'Delete Profile',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Delete Profile'),
+                        content: const Text(
+                            'Are you sure you want to delete your profile?'),
+                        actions: [
+                          TextButton(
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: const Text('Delete'),
+                            onPressed: () async {
+                              await AuthMethods().deleteAccount();
+                              //navigate to login screen
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoginScreen()));
+                            },
+                          ),
+                        ],
+                      );
+                    });
               },
             ),
           ),

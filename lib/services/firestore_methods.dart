@@ -38,6 +38,18 @@ class FireStoreMethods {
     return res;
   }
 
+  //delete user future
+  Future<String> deleteUser(String? uid) async {
+    String res = "Some error occurred";
+    try {
+      await _firestore.collection('users').doc(uid).delete();
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
   // Update Username
   Future<String> updateUsername(String newUName, String uid) async {
     String res = "Some error occurred";

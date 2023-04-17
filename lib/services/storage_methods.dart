@@ -25,4 +25,11 @@ class StorageMethods {
     TaskSnapshot taskSnapshot = await uploadTask;
     return await taskSnapshot.ref.getDownloadURL();
   }
+
+  //delete profile image from firebase storage
+  Future<void> deleteProfileImage(String? uid) async {
+    Reference ref =
+        _storage.ref().child('profileImages').child(_auth.currentUser!.uid);
+    await ref.delete();
+  }
 }
