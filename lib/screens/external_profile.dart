@@ -24,6 +24,7 @@ class _ExternalProfileScreenState extends State<ExternalProfileScreen> {
   @override
   void initState() {
     super.initState();
+    _fetchUserPosts();
     _user = widget.user;
 
     print(_user.username);
@@ -36,6 +37,8 @@ class _ExternalProfileScreenState extends State<ExternalProfileScreen> {
         .map((doc) => Post.fromSnap(doc))
         .where((post) => post.uid == widget.user.uid)
         .toList();
+
+    print(posts);
     setState(() {
       _posts = posts;
     });
@@ -151,7 +154,8 @@ class _ExternalProfileScreenState extends State<ExternalProfileScreen> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
-                ), SizedBox(height: 8),
+                ),
+                SizedBox(height: 8),
                 Text(
                   widget.user.peers.toString(),
                   style: TextStyle(fontSize: 16),
@@ -190,4 +194,4 @@ class _ExternalProfileScreenState extends State<ExternalProfileScreen> {
       ),
     );
   }
-  }
+}

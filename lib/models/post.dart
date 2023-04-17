@@ -6,7 +6,7 @@ class Post {
   final String username;
   final likes;
   final String postId;
-  final DateTime datePublished;
+  final Timestamp datePublished;
   final String postUrl;
   final String profImage;
 
@@ -20,6 +20,19 @@ class Post {
       required this.postUrl,
       required this.profImage,
       });
+
+  factory Post.fromMap(Map<String, dynamic> map, String id) {
+    return Post(
+      description: map["description"],
+      uid: id,
+      likes: map["likes"],
+      postId: map["postId"],
+      datePublished: map["datePublished"],
+      username: map["username"],
+      postUrl: map['postUrl'],
+      profImage: map['profImage'],
+    );
+  }
 
   static Post fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
