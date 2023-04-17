@@ -46,4 +46,4 @@ class Post {
         'postUrl': postUrl,
         'profImage': profImage
       };
-}
+  }
